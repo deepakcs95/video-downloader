@@ -1,6 +1,5 @@
-"use client";
-
 import { useState, useEffect, useRef } from "react";
+import VideoDetailItem from "@/components/VideoDetailItem";
 
 export default function VideoDetails({ format }) {
   const [detailsHeight, setDetailsHeight] = useState(0);
@@ -24,25 +23,7 @@ export default function VideoDetails({ format }) {
     >
       <div className="p-4">
         {videoFormats &&
-          videoFormats.map((detail, index) => (
-            <div
-              key={index}
-              className="grid grid-cols-3 items-center mb-2 last:mb-0 gap-2 sm:gap-4"
-            >
-              <span className="truncate">{detail.container}</span>
-              <span className="truncate">
-                {detail.qualityLabel}
-                {!detail.hasAudio && "🔇"}
-                {detail.hasVideo && "🎞️"}
-              </span>
-              <a
-                href={detail.url}
-                className="bg-black p-2 text-white hover:text-gray-700 rounded text-xs sm:text-sm"
-              >
-                Download
-              </a>
-            </div>
-          ))}
+          videoFormats.map((detail, index) => <VideoDetailItem key={index} detail={detail} />)}
       </div>
     </div>
   );
