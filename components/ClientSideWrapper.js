@@ -44,8 +44,10 @@ const ClientSideWrapper = () => {
             placeholder="https://www.youtube.com/watch?v=cU8xpsdLsdE"
           />
           <SubmitButton isPending={isPending} onClick={handleSubmit} />
-          {error && <span className="p-3 text-sm rounded-md bg-red-400 text-red-900">{error}</span>}
         </div>
+        {error && (
+          <span className="p-3 mt-4 text-sm rounded-md bg-red-400 text-red-900">{error}</span>
+        )}
       </div>
       {videoFormats && <VideoDetails format={videoFormats} />}
     </>
