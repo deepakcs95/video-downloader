@@ -4,17 +4,29 @@ import React, { useState, useTransition } from "react";
 import VideoDetails from "./VideoDetails";
 import InputField from "./InputField";
 import SubmitButton from "./SubmitButton";
+import { isValidYouTubeUrl } from "@/utils/validator";
 
 const ClientSideWrapper = () => {
   const [url, setUrl] = useState("");
+  const [error, setError] = useState("");
   const [videoFormats, setVideoFormats] = useState(null);
   const [isPending, startTransition] = useTransition();
 
   const handleSubmit = () => {
+    setError("");
+    setVideoFormats(null);
+    const isValid = isValidYouTubeUrl(url);
+    if (!isValid) {
+      setError("Please enter correct url");
+      return;
+    }
+
     startTransition(async () => {
       const format = await getVideoDetails(url);
       console.log(format);
-      setVideoFormats(format);
+      if (format) {
+        setVideoFormats(format);
+      } else setError("Video not found or Somethings wrong");
     });
   };
 
@@ -32,6 +44,7 @@ const ClientSideWrapper = () => {
             placeholder="https://www.youtube.com/watch?v=cU8xpsdLsdE"
           />
           <SubmitButton isPending={isPending} onClick={handleSubmit} />
+          {error && <span className="p-3 text-sm rounded-md bg-red-400 text-red-900">{error}</span>}
         </div>
       </div>
       {videoFormats && <VideoDetails format={videoFormats} />}
