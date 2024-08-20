@@ -2,8 +2,8 @@ import ClientSideWrapper from "@/components/ClientSideWrapper";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-primary flex flex-col items-center justify-start px-4 py-8">
-      <header className="w-full max-w-6xl mx-auto mb-8">
+    <div className="relative pt-20 min-h-screen bg-primary flex flex-col items-center justify-center px-4 py-8">
+      <header className="absolute top-7 left-7  max-w-6xl   mb-8">
         <h1 className="text-2xl sm:text-3xl font-bold text-secondary">DownloadDash</h1>
       </header>
 
